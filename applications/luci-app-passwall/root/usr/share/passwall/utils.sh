@@ -64,7 +64,8 @@ get_enabled_anonymous_secs() {
 get_geoip() {
 	local geoip_code="$1"
 	local geoip_type_flag=""
-	local geoip_path="${V2RAY_LOCATION_ASSET%*/}/geoip.dat"
+	local geoip_path="$(config_t_get global_rules v2ray_location_asset "/usr/share/v2ray/")"
+	geoip_path="${geoip_path%*/}/geoip.dat"
 	local bin="$(first_type $(config_t_get global_app geoview_file) geoview)"
 	[ -n "$bin" ] && [ -s "$geoip_path" ] || { echo ""; return 1; }
 	case "$2" in
